@@ -1,0 +1,22 @@
+spring.h2:
+  console:
+    enabled: true
+    path: /console
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+    generate-ddl: true
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/hug?useSSL=false&serverTimezone=Asia/Seoul
+    username: root
+    password: 1234
