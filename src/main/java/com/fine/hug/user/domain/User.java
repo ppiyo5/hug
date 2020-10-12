@@ -8,20 +8,18 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "userType")
 @Getter
 @Embeddable
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(uniqueConstraints = @UniqueConstraint(name = "UNIQUE_LOGIN_ID", columnNames = {"loginId"}))
 public class User extends BaseTimeEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(nullable = false)
-    private String userId;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
+//
+//    @Column(nullable = false)
+//    private String userId;
 
     @Column(nullable = false)
     private String userName;
@@ -43,8 +41,7 @@ public class User extends BaseTimeEntity {
     private Role role;
 
     @Builder
-    public User(String userId, String userName, String password, String gender, String birthDate, String email, Role role) {
-        this.userId = userId;
+    public User(final String userName, final String password, final String gender, final String birthDate, final String email, final Role role) {
         this.userName = userName;
         this.password = password;
         this.gender = gender;

@@ -8,14 +8,12 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@DiscriminatorValue("D")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UserDoctor {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String userId;
 
     @Column(nullable = false)
     private String hospital;
@@ -27,10 +25,10 @@ public class UserDoctor {
     private User user;
 
     @Builder
-    public UserDoctor(final Long id, final String userId, final String userName, final String password, final String gender, final String birthDate, final String email, final Role role, final String hospital, final String access) {
-        this.id = id;
+    public UserDoctor(final String userId, final String hospital, final String access, final String userName, final String password, final String gender, final String birthDate, final String email, final Role role) {
+        this.userId = userId;
         this.hospital = hospital;
         this.access = access;
-        this.user = new User(userId, userName, password, gender, birthDate, email, role);
+        this.user = new User(userName, password, gender, birthDate, email, role);
     }
 }

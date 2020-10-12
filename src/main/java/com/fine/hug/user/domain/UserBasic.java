@@ -5,17 +5,18 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
-@DiscriminatorValue("B")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UserBasic {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String userId;
 
     @Column(nullable = false)
     private String visitPath;
@@ -24,9 +25,9 @@ public class UserBasic {
     private User user;
 
     @Builder
-    public UserBasic(final Long id, final String userId, final String userName, final String password, final String gender, final String birthDate, final String email, final Role role, final String visitPath) {
-        this.id = id;
+    public UserBasic(final String userId, String visitPath, final String userName, final String password, final String gender, final String birthDate, final String email, final Role role) {
+        this.userId = userId;
         this.visitPath = visitPath;
-        this.user = new User(userId, userName, password, gender, birthDate, email, role);
+        this.user = new User(userName, password, gender, birthDate, email, role);
     }
 }
