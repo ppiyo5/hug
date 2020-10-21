@@ -16,28 +16,22 @@ public class UserDoctorResponseDto {
 
     private String userName;
 
-    private String birthDate;
-
-    private String gender;
-
     private String email;
 
     private String hospital;
 
-    private String access;
+    private String major;
 
     private Role role;
 
     @Builder
-    public UserDoctorResponseDto(String userId, String password, String userName, String birthDate, String gender, String email, String hospital, String access, Role role) {
+    public UserDoctorResponseDto(String userId, String password, String userName, String email, String hospital, String major, Role role) {
         this.userId = userId;
         this.password = password;
         this.userName = userName;
-        this.birthDate = birthDate;
-        this.gender = gender;
         this.email = email;
         this.hospital = hospital;
-        this.access = access;
+        this.major = major;
         this.role = role;
     }
 }

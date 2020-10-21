@@ -2,5 +2,8 @@ package com.fine.hug.user.domain;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserDoctorRepository extends JpaRepository<UserDoctor, String> {
+import java.util.Optional;
+
+public interface UserDoctorRepository extends JpaRepository<UserDoctor, Long> {
+    Optional<UserDoctor> findByUserId(String userId);
 }

@@ -16,10 +16,6 @@ public class UserBasicResponseDto {
 
     private String userName;
 
-    private String birthDate;
-
-    private String gender;
-
     private String email;
 
     private String visitPath;
@@ -27,12 +23,10 @@ public class UserBasicResponseDto {
     private Role role;
 
     @Builder
-    public UserBasicResponseDto(String userId, String password, String userName, String birthDate, String gender, String email, String visitPath, Role role) {
+    public UserBasicResponseDto(String userId, String password, String userName, String email, String visitPath, Role role) {
         this.userId = userId;
         this.password = password;
         this.userName = userName;
-        this.birthDate = birthDate;
-        this.gender = gender;
         this.email = email;
         this.visitPath = visitPath;
         this.role = role;

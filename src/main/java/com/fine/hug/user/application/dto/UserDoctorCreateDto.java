@@ -34,7 +34,7 @@ public class UserDoctorCreateDto {
     private String hospital;
 
     @NotBlank
-    private String access;
+    private String major;
 
     @NotBlank
     private Role role;

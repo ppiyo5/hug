@@ -6,34 +6,37 @@ import com.fine.hug.user.domain.UserDoctor;
 import com.fine.hug.user.ui.dto.UserDoctorResponseDto;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class UserDoctorTranslate {
 
     public static UserDoctor translate(UserDoctorCreateDto dto) {
+
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
         return UserDoctor.builder()
                 .userId(dto.getUserId())
-                .password(dto.getPassword())
+                .password(encoder.encode(dto.getPassword()))
                 .userName(dto.getUserName())
-                .birthDate(dto.getBirthDate())
-                .gender(dto.getGender())
                 .email(dto.getEmail())
                 .hospital(dto.getHospital())
-                .access(dto.getAccess())
-                .role(Role.DOCTOR)
+                .major(dto.getMajor())
+//                .role(Role.DOCTOR)
                 .build();
     }
 
     public static UserDoctorResponseDto translate(UserDoctor userDoctor) {
+
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
         return UserDoctorResponseDto.builder()
                 .userId(userDoctor.getUserId())
-                .password(userDoctor.getUser().getPassword())
-                .userName(userDoctor.getUser().getUserName())
-                .birthDate(userDoctor.getUser().getBirthDate())
-                .gender(userDoctor.getUser().getGender())
-                .email(userDoctor.getUser().getEmail())
+                .password(encoder.encode(userDoctor.getPassword()))
+                .userName(userDoctor.getUserName())
+                .email(userDoctor.getEmail())
                 .hospital(userDoctor.getHospital())
-                .access(userDoctor.getAccess())
+                .major(userDoctor.getMajor())
                 .role(Role.DOCTOR)
                 .build();
     }

@@ -6,32 +6,37 @@ import com.fine.hug.user.domain.UserBasic;
 import com.fine.hug.user.ui.dto.UserBasicResponseDto;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import java.util.Collections;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class UserBasicTranslate {
 
     public static UserBasic translate(UserBasicCreateDto dto) {
+
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
         return UserBasic.builder()
                 .userId(dto.getUserId())
-                .password(dto.getPassword())
+                .password(encoder.encode(dto.getPassword()))
                 .userName(dto.getUserName())
-                .birthDate(dto.getBirthDate())
-                .gender(dto.getGender())
                 .email(dto.getEmail())
-                .visitPath(dto.getEmail())
-                .role(Role.BASIC)
+                .visitPath(dto.getVisitPath())
+                .role(Collections.singleton(Role.BASIC))
                 .build();
     }
 
     public static UserBasicResponseDto translate(UserBasic userBasic) {
+
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
         return UserBasicResponseDto.builder()
                 .userId(userBasic.getUserId())
-                .password(userBasic.getUser().getPassword())
-                .userName(userBasic.getUser().getUserName())
-                .birthDate(userBasic.getUser().getBirthDate())
-                .gender(userBasic.getUser().getGender())
-                .email(userBasic.getUser().getEmail())
-                .visitPath(userBasic.getUser().getEmail())
+                .password(encoder.encode(userBasic.getPassword()))
+                .userName(userBasic.getUserName())
+                .email(userBasic.getEmail())
+                .visitPath(userBasic.getVisitPath())
                 .role(Role.BASIC)
                 .build();
     }

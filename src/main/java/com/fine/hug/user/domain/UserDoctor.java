@@ -6,29 +6,40 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Getter
+@DiscriminatorValue("BASIC")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class UserDoctor {
-
-    @Id
-    private String userId;
+public class UserDoctor extends User {
 
     @Column(nullable = false)
     private String hospital;
 
     @Column(nullable = false)
-    private String access = "0";
+    private String major;
 
-    @Embedded
-    private User user;
+    private String userId;
+
+    private String userName;
+
+    private String password;
+
+    private String email;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Enumerated(EnumType.STRING)
+    private Set<Role> role;
 
     @Builder
-    public UserDoctor(final String userId, final String hospital, final String access, final String userName, final String password, final String gender, final String birthDate, final String email, final Role role) {
-        this.userId = userId;
+    public UserDoctor(String hospital, String major, String userId, String userName, String password, String email, Set<Role> role) {
         this.hospital = hospital;
-        this.access = access;
-        this.user = new User(userName, password, gender, birthDate, email, role);
+        this.major = major;
+        this.userId = userId;
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+        this.role = role;
     }
 }

@@ -6,7 +6,7 @@ spring.h2:
 spring:
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     open-in-view: false
     properties:
       hibernate:
@@ -20,3 +20,10 @@ spring:
     url: jdbc:mysql://localhost:3306/hug?useSSL=false&serverTimezone=Asia/Seoul
     username: root
     password: 1234
+logging:
+  level:
+    "[org.springframework.security]": DEBUG
+
+#jwt:
+#  header: Authorization
+#  secret: app.token-secret-key
