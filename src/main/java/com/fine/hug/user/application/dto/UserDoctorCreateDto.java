@@ -21,12 +21,6 @@ public class UserDoctorCreateDto {
     @NotBlank
     private String userName;
 
-    @NotBlank
-    private String gender;
-
-    @NotBlank
-    private String birthDate;
-
     @Email(regexp = "^(.+)@(.+)$")
     private String email;
 

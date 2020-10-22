@@ -29,7 +29,7 @@ public class UserBasic extends User {
     @Enumerated(EnumType.STRING)
     private Set<Role> role;
 
-    @Builder
+    @Builder(builderMethodName = "createBasic")
     public UserBasic(String visitPath, String userId, String userName, String password, String email, Set<Role> role) {
         this.visitPath = visitPath;
         this.userId = userId;

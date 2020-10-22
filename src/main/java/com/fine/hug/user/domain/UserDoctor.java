@@ -10,7 +10,7 @@ import java.util.Set;
 
 @Entity
 @Getter
-@DiscriminatorValue("BASIC")
+@DiscriminatorValue("DOCTOR")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UserDoctor extends User {
 
@@ -32,7 +32,7 @@ public class UserDoctor extends User {
     @Enumerated(EnumType.STRING)
     private Set<Role> role;
 
-    @Builder
+    @Builder(builderMethodName = "createDoctor")
     public UserDoctor(String hospital, String major, String userId, String userName, String password, String email, Set<Role> role) {
         this.hospital = hospital;
         this.major = major;

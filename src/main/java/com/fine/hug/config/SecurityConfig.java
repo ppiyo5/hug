@@ -54,14 +54,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     private static final String[] PUBLIC = new String[] {
-            "/error", "/login", "/logout", "/api/v1/createUserBasic", "/", "/token"
+            "/error", "/login", "/logout", "/api/v1/createUserBasic", "/api/v1/createUserDoctor", "/"
     };
 
     @Override
     public void configure(WebSecurity web) throws Exception {
         // swagger 관련 리소스 시큐리티 필터 제거
-        web.ignoring().antMatchers("/v2/api-docs", "/swagger-resources/**",
-                "/swagger-ui.html", "/webjars/**", "/swagger/**");
+        web.ignoring().antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources/**", "/configuration/**", "/swagger-ui.html", "/webjars/**");
         web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations()); //스프링 부트가 제공하는 static 리소스들의 기본위치를 다 가져와서 스프링 시큐리티에서 제외
     }
 
@@ -86,11 +85,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .access("hasRole('DOCTOR')")
                 .anyRequest().authenticated()
                 .and()
-                .formLogin()
-                .loginProcessingUrl("/login") // /login 주소가 호출이 되면 시큐리티가 낚아채서 대신 로그인 진행
-                .defaultSuccessUrl("/")
-                .and()
-//                .formLogin().disable()
+                .formLogin().disable()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/")

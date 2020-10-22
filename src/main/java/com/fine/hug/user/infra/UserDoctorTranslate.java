@@ -3,10 +3,12 @@ package com.fine.hug.user.infra;
 import com.fine.hug.user.application.dto.UserDoctorCreateDto;
 import com.fine.hug.user.domain.Role;
 import com.fine.hug.user.domain.UserDoctor;
-import com.fine.hug.user.ui.dto.UserDoctorResponseDto;
+import com.fine.hug.user.ui.dto.UserResponseDto;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import java.util.Collections;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class UserDoctorTranslate {
@@ -15,22 +17,22 @@ public class UserDoctorTranslate {
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-        return UserDoctor.builder()
+        return UserDoctor.createDoctor()
                 .userId(dto.getUserId())
                 .password(encoder.encode(dto.getPassword()))
                 .userName(dto.getUserName())
                 .email(dto.getEmail())
                 .hospital(dto.getHospital())
                 .major(dto.getMajor())
-//                .role(Role.DOCTOR)
+                .role(Collections.singleton(Role.DOCTOR))
                 .build();
     }
 
-    public static UserDoctorResponseDto translate(UserDoctor userDoctor) {
+    public static UserResponseDto translate(UserDoctor userDoctor) {
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-        return UserDoctorResponseDto.builder()
+        return UserResponseDto.builder()
                 .userId(userDoctor.getUserId())
                 .password(encoder.encode(userDoctor.getPassword()))
                 .userName(userDoctor.getUserName())

@@ -2,6 +2,7 @@ package com.fine.hug.user.domain;
 
 import com.fine.hug.user.BaseTimeEntity;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -44,4 +45,14 @@ public class User extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Set<Role> role;
+
+    @Builder
+    public User(Long id, String userId, String userName, String password, String email, Set<Role> role) {
+        this.id = id;
+        this.userId = userId;
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+    }
 }

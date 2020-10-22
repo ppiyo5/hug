@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class UserDoctorResponseDto {
+public class UserResponseDto {
 
     private String userId;
 
@@ -18,6 +18,8 @@ public class UserDoctorResponseDto {
 
     private String email;
 
+    private String visitPath;
+
     private String hospital;
 
     private String major;
@@ -25,11 +27,12 @@ public class UserDoctorResponseDto {
     private Role role;
 
     @Builder
-    public UserDoctorResponseDto(String userId, String password, String userName, String email, String hospital, String major, Role role) {
+    public UserResponseDto(String userId, String password, String userName, String email, String visitPath, String hospital, String major, Role role) {
         this.userId = userId;
         this.password = password;
         this.userName = userName;
         this.email = email;
+        this.visitPath = visitPath;
         this.hospital = hospital;
         this.major = major;
         this.role = role;

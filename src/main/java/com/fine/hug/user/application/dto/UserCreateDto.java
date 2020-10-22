@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class UserBasicCreateDto {
+public class UserCreateDto {
 
     @NotBlank
     private String userId;
@@ -21,14 +21,9 @@ public class UserBasicCreateDto {
     @NotBlank
     private String userName;
 
-    @NotBlank
     @Email(regexp = "^(.+)@(.+)$")
     private String email;
 
     @NotBlank
-    private String visitPath;
-
-    @NotBlank
     private Role role;
-
 }
